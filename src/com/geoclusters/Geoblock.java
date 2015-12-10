@@ -7,7 +7,8 @@ import java.util.ArrayList;
  */
 public class Geoblock {
     Geocluster current_cluster;
-    ArrayList<Geocluster> geoclusters;
+    ArrayList<Geocluster> geoclusters = new ArrayList<Geocluster>();
+    ArrayList<Geo> geos = new ArrayList<Geo>();
     int width, height;
 
     Geoblock(int w, int h){
@@ -16,9 +17,16 @@ public class Geoblock {
 
         int total = width * height;
 
+        // Create Geos
         for(int i=0;i<total;i++){
-            geoclusters.
+            geos.add(new Geo(i))
         }
 
+        // Link Geos
+        for(var w=0;w<width;w++){
+            for(var h=0;h<height;h++){
+                
+            }
+        }
     }
 }
