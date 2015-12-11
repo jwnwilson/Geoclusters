@@ -33,7 +33,7 @@ public class Main {
 
         // assign user blocks from csv
         try {
-            CsvReader reader = new CsvReader(new FileReader("yourfile.csv"));
+            CsvReader reader = new CsvReader(new FileReader(csv_path));
             reader.readHeaders();
 
             while (reader.readRecord())
