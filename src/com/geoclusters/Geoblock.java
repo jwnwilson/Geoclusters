@@ -71,6 +71,7 @@ public class Geoblock {
         if( in_clusters(g) == false && g.user != null) {
             // if block is assigned add to cluster and transverse edges
             Geocluster cluster = new Geocluster();
+            geoclusters.add(cluster);
             g.get_cluster(cluster, this);
 
             return cluster;
@@ -85,8 +86,7 @@ public class Geoblock {
     public void get_clusters(){
         int total = width * height;
         for(int i=0;i<total;i++){
-            Geocluster gc = get_cluster(i);
-            if(gc != null) geoclusters.add(gc);
+            get_cluster(i);
         }
     }
 

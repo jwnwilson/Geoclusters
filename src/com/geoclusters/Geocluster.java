@@ -36,7 +36,7 @@ public class Geocluster {
     public String output(){
         String output_str = "";
         for(int i=0;i<geocluster.size();i++){
-            output_str = geocluster.get(i).output();
+            output_str += geocluster.get(i).output() + "\n";
         }
 
         return output_str;

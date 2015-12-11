@@ -4,6 +4,10 @@ import java.util.Date;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.List;
 import com.csvreader.CsvReader;
 
@@ -40,9 +44,19 @@ public class Main {
             {
                 int index = Integer.parseInt(reader.get("Index"));
                 User user = new User(reader.get("Name"));
-                Date date = new Date(reader.get("Date"));
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date date;
+                try {
+                    date = format.parse(reader.get("Date"));
+                }
+                catch(ParseException e){
+                    System.out.print("Unable to parse date: " + reader.get("Date"));
+                    continue;
+                }
 
                 geoblock.assign_block(index, user, date);
+                System.out.print("Block: " + Integer.toString(index) + " assigned to user: " + user.name + " with date " +
+                date.toString() + "\n");
             }
             reader.close();
 
