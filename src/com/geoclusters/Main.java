@@ -71,6 +71,8 @@ public class Main {
         Geocluster cluster = geoblock.get_largest_cluster();
 
         // output cluster data
+        System.out.print("\n");
+        System.out.print("Largest cluster:\n");
         System.out.print(cluster.output());
 
     }
