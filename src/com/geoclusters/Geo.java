@@ -65,9 +65,15 @@ public class Geo {
         return assigned_date;
     }
 
-    public Geocluster get_cluster(Geocluster cluster){
-        if(user != null){
-            
+    public Geocluster get_cluster(Geocluster cluster, Geoblock gb){
+        if(user != null && gb.in_clusters(this) == false){
+            cluster.add(this);
+            if(up != null) up.get_cluster(cluster, gb);
+            if(down != null) down.get_cluster(cluster, gb);
+            if(right != null) right.get_cluster(cluster, gb);
+            if(left != null) left.get_cluster(cluster, gb);
+
+            return cluster;
         }
         return null;
     }

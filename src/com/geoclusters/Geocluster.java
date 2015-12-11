@@ -20,6 +20,15 @@ public class Geocluster {
         geocluster.add(g);
     }
 
+    public boolean has(Geo g){
+        for(int i=0;i<geocluster.size();i++){
+            if(geocluster.get(i) == g){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String output(){
         String output_str = "";
         for(int i=0;i<geocluster.size();i++){

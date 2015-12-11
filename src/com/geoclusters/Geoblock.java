@@ -55,13 +55,26 @@ public class Geoblock {
         geos.get(index).assign_geo(user, date);
     }
 
-    public Geocluster get_cluster(int index, Geocluster cluster){
+    boolean in_clusters(Geo g){
+        for(int i=0;i<geoclusters.size();i++){
+            if(geoclusters.get(i).has(g)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Geocluster get_cluster(int index){
+        Geo g = geos.get(index);
         // check that block isn't already in a cluster
+        if( in_clusters(g) == false && g.user != null) {
+            // if block is assigned add to cluster and transverse edges
+            Geocluster cluster = new Geocluster();
+            g.get_cluster(cluster, this);
 
-        // if block is assigned add to cluster and transverse edges
-
+            return cluster;
+        }
         // else return
-
         return null;
     }
 
@@ -69,7 +82,11 @@ public class Geoblock {
      * Get clusters and save it in the Geoblock object
      */
     public void get_clusters(){
-
+        int total = width * height;
+        for(int i=0;i<total;i++){
+            Geocluster gc = get_cluster(i);
+            if(gc != null) geoclusters.add(gc);
+        }
     }
 
     /**
