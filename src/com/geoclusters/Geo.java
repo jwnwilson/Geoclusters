@@ -20,7 +20,7 @@ public class Geo {
         down = null;
     }
 
-    void public set_link(String direction, Geo g){
+    public void set_link(String direction, Geo g){
         if(direction == "up"){
             up = g;
         }
@@ -35,7 +35,7 @@ public class Geo {
         }
     }
 
-    Geo public get_link(String direction) {
+    public Geo get_link(String direction) {
         if(direction == "up"){
             return up;
         }
@@ -48,18 +48,20 @@ public class Geo {
         if(direction == "left"){
             return left;
         }
+
+        return null;
     }
 
-    void public assign_geo(User u){
+    public void assign_geo(User u){
         user = u;
         assigned_date = new Date();
     }
 
-    User public get_user(){
+    public User get_user(){
         return user;
     }
 
-    Date public get_assigned_date(){
+    public Date get_assigned_date(){
         return assigned_date;
     }
 

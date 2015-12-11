@@ -7,4 +7,8 @@ import java.util.ArrayList;
  */
 public class Geocluster {
     ArrayList<Geo> geocluster;
+
+    public Geocluster(){
+        geocluster = new ArrayList<Geo>();
+    }
 }
