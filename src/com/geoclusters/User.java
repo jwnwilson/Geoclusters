@@ -5,4 +5,8 @@ package com.geoclusters;
  */
 public class User {
     String name;
+
+    public User (String n){
+        name = n;
+    }
 }

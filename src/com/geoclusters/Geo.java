@@ -52,9 +52,9 @@ public class Geo {
         return null;
     }
 
-    public void assign_geo(User u){
+    public void assign_geo(User u, Date date){
         user = u;
-        assigned_date = new Date();
+        assigned_date = date;
     }
 
     public User get_user(){
@@ -63,6 +63,17 @@ public class Geo {
 
     public Date get_assigned_date(){
         return assigned_date;
+    }
+
+    public Geocluster get_cluster(Geocluster cluster){
+        if(user != null){
+            
+        }
+        return null;
+    }
+
+    public String output(){
+        return (Integer.toString(index) + ", " + user.name + ", " + assigned_date.toString());
     }
 
 

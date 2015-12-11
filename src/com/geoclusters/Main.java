@@ -1,5 +1,6 @@
 package com.geoclusters;
 
+import java.util.Date;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -27,16 +28,21 @@ public class Main {
             return;
         }
 
+        // create geo block
+        Geoblock geoblock = new Geoblock(width, height);
+
+        // assign user blocks from csv
         try {
             CsvReader reader = new CsvReader(new FileReader("yourfile.csv"));
             reader.readHeaders();
 
             while (reader.readRecord())
             {
-                String index = reader.get("Index");
-                String name = reader.get("Name");
-                String date = reader.get("Date");
+                int index = Integer.parseInt(reader.get("Index"));
+                User user = new User(reader.get("Name"));
+                Date date = new Date(reader.get("Date"));
 
+                geoblock.assign_block(index, user, date);
             }
             reader.close();
 
@@ -46,7 +52,12 @@ public class Main {
             e.printStackTrace();
         }
 
-        Geoblock geoblock = new Geoblock(width, height);
+        // calculate clusters and get largest
+        geoblock.get_clusters();
+        Geocluster cluster = geoblock.get_largest_cluster();
+
+        // output cluster data
+        System.out.print(cluster.output());
 
     }
 }
