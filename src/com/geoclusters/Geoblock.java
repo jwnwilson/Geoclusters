@@ -8,6 +8,7 @@ import java.util.Date;
  */
 public class Geoblock {
     Geocluster current_cluster;
+    Geocluster largest_cluster;
     ArrayList<Geocluster> geoclusters;
     ArrayList<Geo> geos;
     int width, height;
@@ -94,7 +95,15 @@ public class Geoblock {
      * @return
      */
     public Geocluster get_largest_cluster(){
-
-        return null;
+        Geocluster largest_gc = null;
+        for(int i=0;i<geoclusters.size();i++)
+        {
+            if(largest_gc == null) largest_gc = geoclusters.get(i);
+            else if(largest_gc.get_geocluster().size() < geoclusters.get(i).get_geocluster().size()){
+                largest_gc = geoclusters.get(i);
+            }
+        }
+        largest_cluster = largest_gc;
+        return largest_gc;
     }
 }

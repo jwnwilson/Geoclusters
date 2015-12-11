@@ -20,6 +20,10 @@ public class Geocluster {
         geocluster.add(g);
     }
 
+    public ArrayList<Geo> get_geocluster(){
+        return geocluster;
+    }
+
     public boolean has(Geo g){
         for(int i=0;i<geocluster.size();i++){
             if(geocluster.get(i) == g){
