@@ -1,5 +1,6 @@
-package test;
 import static org.junit.Assert.assertEquals;
+
+import com.geoclusters.Geocluster;
 import org.junit.Test;
 import com.geoclusters.Geoblock;
 
@@ -10,7 +11,46 @@ import com.geoclusters.Geoblock;
 public class GeoBlockTest {
     @Test
     public void test4by7Geoblock() {
-        Geoblock geoblocks = new Geoblock(4,7);
-        assertEquals(28, geoblocks.get_geos().size());
+        String csv_file = "test_01.csv";
+        Geoblock geoblock = new Geoblock(4,7);
+        assertEquals(28, geoblock.get_geos().size());
+
+        // Load csv data into geo block
+        geoblock.load_csv(csv_file);
+
+        // Get largest
+        Geocluster cluster = geoblock.get_largest_cluster();
+
+        // Output cluster data =
+        String cluster_expected_output = "13, Matt, Thu Oct 14 00:00:00 BST 2010\n" +
+        "17, Patrick, Thu Mar 10 00:00:00 GMT 2011\n" +
+        "21, Catherine, Fri Feb 25 00:00:00 GMT 2011\n" +
+        "22, Michael, Fri Feb 25 00:00:00 GMT 2011\n";
+        String cluster_output = cluster.output();
+
+        assertEquals(cluster_expected_output, cluster_output);
+    }
+
+    @Test
+    public void test7by4Geoblock() {
+        String csv_file = "test_01.csv";
+        Geoblock geoblock = new Geoblock(7,4);
+        assertEquals(28, geoblock.get_geos().size());
+
+        // Load csv data into geo block
+        geoblock.load_csv(csv_file);
+
+        // Get largest
+        Geocluster cluster = geoblock.get_largest_cluster();
+
+        // Output cluster data =
+        String cluster_expected_output = "4, Tom, Sun Oct 10 00:00:00 BST 2010\n" +
+                "11, Mel, Sat Jan 01 00:00:00 GMT 2011\n" +
+                "5, Katie, Tue Aug 24 00:00:00 BST 2010\n" +
+                "6, Nicole, Sun Jan 09 00:00:00 GMT 2011\n" +
+                "13, Matt, Thu Oct 14 00:00:00 BST 2010\n";
+        String cluster_output = cluster.output();
+
+        assertEquals(cluster_expected_output, cluster_output);
     }
 }

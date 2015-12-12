@@ -1,7 +1,16 @@
 package com.geoclusters;
 
+import com.csvreader.CsvReader;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by noelwilson on 10/12/2015.
@@ -57,6 +66,52 @@ public class Geoblock {
         System.out.print("Test");
     }
 
+    /**
+     * Load Geoblock data from csv file
+     * @param csv_file
+     */
+    public boolean load_csv(String csv_file){
+        // Assign user blocks from csv
+        try {
+            CsvReader reader = new CsvReader(csv_file);
+            reader.readHeaders();
+
+            while (reader.readRecord())
+            {
+                int index = Integer.parseInt(reader.get("Index"));
+                User user = new User(reader.get("Name"));
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+                Date date;
+                try {
+                    date = format.parse(reader.get("Date"));
+                }
+                catch(ParseException e){
+                    System.out.print("Unable to parse date: " + reader.get("Date"));
+                    continue;
+                }
+
+                this.assign_block(index, user, date);
+                System.out.print("Block: " + Integer.toString(index) + " assigned to user: " + user.name +
+                        " with date " + date.toString() + "\n");
+            }
+            reader.close();
+
+        } catch (FileNotFoundException e) {
+            System.out.print("File not found: " + csv_file + "\n");
+            //e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.print("Error opening or closing file: " + csv_file + "\n");
+            return false;
+        }
+
+        // After loading csv file calculate clusters
+        this.calculate_clusters();
+
+        return true;
+    }
+
     public ArrayList<Geo> get_geos(){
         return geos;
     }
@@ -109,9 +164,9 @@ public class Geoblock {
     }
 
     /**
-     * Get clusters and save it in the Geoblock object
+     * Calculate clusters and save it in the Geoblock object
      */
-    public void get_clusters(){
+    public void calculate_clusters(){
         int total = width * height;
         for(int i=0;i<total;i++){
             get_cluster(i);
