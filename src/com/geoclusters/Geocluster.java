@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 /**
  * Created by noelwilson on 10/12/2015.
+ *
+ * Used to store an Array of Geos which are connected and are assigned to a user
  */
 public class Geocluster {
     ArrayList<Geo> geocluster;
@@ -33,6 +35,10 @@ public class Geocluster {
         return false;
     }
 
+    /**
+     * Pretty string output using the Geos output function
+     * @return String geo cluster output
+     */
     public String output(){
         String output_str = "";
         for(int i=0;i<geocluster.size();i++){

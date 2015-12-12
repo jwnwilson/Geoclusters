@@ -32,10 +32,10 @@ public class Main {
             return;
         }
 
-        // create geo block
+        // Create geo block
         Geoblock geoblock = new Geoblock(width, height);
 
-        // assign user blocks from csv
+        // Assign user blocks from csv
         try {
             CsvReader reader = new CsvReader(new FileReader(csv_path));
             reader.readHeaders();
@@ -66,11 +66,11 @@ public class Main {
             e.printStackTrace();
         }
 
-        // calculate clusters and get largest
+        // Calculate clusters and get largest
         geoblock.get_clusters();
         Geocluster cluster = geoblock.get_largest_cluster();
 
-        // output cluster data
+        // Output cluster data
         System.out.print("\n");
         System.out.print("Largest cluster:\n");
         System.out.print(cluster.output());
