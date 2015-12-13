@@ -91,8 +91,8 @@ public class Geoblock {
                 }
 
                 this.assign_block(index, user, date);
-                System.out.print("Block: " + Integer.toString(index) + " assigned to user: " + user.name +
-                        " with date " + date.toString() + "\n");
+                //System.out.print("Block: " + Integer.toString(index) + " assigned to user: " + user.name +
+                //        " with date " + date.toString() + "\n");
             }
             reader.close();
 

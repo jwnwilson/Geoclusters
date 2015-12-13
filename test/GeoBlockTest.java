@@ -1,5 +1,5 @@
 import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.assertTrue;
 import com.geoclusters.Geocluster;
 import org.junit.Test;
 import com.geoclusters.Geoblock;
@@ -52,5 +52,26 @@ public class GeoBlockTest {
         String cluster_output = cluster.output();
 
         assertEquals(cluster_expected_output, cluster_output);
+    }
+
+    @Test
+    public void load_test() {
+        String csv_file = "test_02.csv";
+        long startTime = System.currentTimeMillis();
+
+        Geoblock geoblock = new Geoblock(1000,1000);
+
+        // Load csv data into geo block
+        geoblock.load_csv(csv_file);
+
+        // Get largest
+        Geocluster cluster = geoblock.get_largest_cluster();
+
+        long finishTime = System.currentTimeMillis();
+        long time_passed = (finishTime - startTime);
+
+        System.out.print("Test time passed: " + Long.toString(time_passed));
+
+        assertTrue(time_passed < 1000);
     }
 }
